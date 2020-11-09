@@ -1,7 +1,6 @@
-import Header from './Header';
-import MainContent from './MainContent';
-import './App.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import Header from './Header/Header';
+import MainContent from './MainContent/MainContent';
 import styled from 'styled-components';
 
 const AppContainer = styled.div`
@@ -17,12 +16,12 @@ function App() {
     { id: 4, title: 'Four', status: true },
   ]);
 
-  const addNewTask = (title) => {
+  const addNewTask = (title: string) => {
     const newTask = { id: taskList.length + 1, title, status: true };
     setTaskList([...taskList, newTask]);
   };
 
-  const changeStatus = (id) => {
+  const changeStatus = (id: number) => {
     const newArr = [...taskList];
     const findTask = newArr.find((task) => task.id === +id);
     if (findTask) findTask.status = !findTask.status;
@@ -32,7 +31,7 @@ function App() {
   return (
     <div className="App">
       <AppContainer>
-        <Header taskList={taskList} />
+        <Header taskList={taskList}/>
         <MainContent
           taskList={taskList}
           addNewTask={addNewTask}

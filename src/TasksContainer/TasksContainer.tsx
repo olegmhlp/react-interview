@@ -1,38 +1,13 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import { Container, Header, Task, TaskContainer } from './TaskContainer.style';
+import { Item } from '../types';
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  min-height: 10rem;
-`;
+interface Tasks {
+  taskList: Item[];
+  changeStatus: Function;
+}
 
-const Header = styled.p`
-  font-size: 30px;
-  padding: 2rem 0;
-  font-weight: bold;
-`;
-
-const Task = styled.p`
-  font-size: 18px;
-  padding-left: 0.5rem;
-  ${(props) =>
-    props.completed &&
-    css`
-      color: lightgray;
-      text-decoration: line-through;
-    `}
-`;
-
-const TaskContainer = styled.div`
-  cursor: pointer;
-  display: flex; 
-  align-items: center;
-  margin: 0.5rem 0;
-`;
-
-function TasksContainer({ taskList, changeStatus }) {
+const TasksContainer: React.FC<Tasks> = ({ taskList, changeStatus }) => {
   return (
     <Container>
       <Header>Active tasks</Header>
@@ -41,11 +16,12 @@ function TasksContainer({ taskList, changeStatus }) {
           taskList.map((task) => {
             if (task.status)
               return (
-                <TaskContainer key={task.id} onClick={() => changeStatus(task.id)}>
+                <TaskContainer
+                  key={task.id}
+                  onClick={() => changeStatus(task.id)}
+                >
                   <input type="checkbox" />
-                  <Task >
-                    {task.title}
-                  </Task>
+                  <Task>{task.title}</Task>
                 </TaskContainer>
               );
           })}
@@ -66,6 +42,6 @@ function TasksContainer({ taskList, changeStatus }) {
       </Container>
     </Container>
   );
-}
+};
 
 export default TasksContainer;
