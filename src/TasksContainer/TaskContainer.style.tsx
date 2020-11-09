@@ -13,7 +13,7 @@ export const Container = styled.div`
 
 export const Header = styled.p`
   font-size: 30px;
-  padding: 2rem 0;
+  padding: 1rem 0;
   font-weight: bold;
 `;
 
@@ -32,5 +32,5 @@ export const TaskContainer = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
-  margin: 0.5rem 0;
+  margin: 0.1rem 0;
 `;

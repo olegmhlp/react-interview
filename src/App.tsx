@@ -31,7 +31,7 @@ function App() {
   return (
     <div className="App">
       <AppContainer>
-        <Header taskList={taskList}/>
+        <Header taskList={taskList} />
         <MainContent
           taskList={taskList}
           addNewTask={addNewTask}
