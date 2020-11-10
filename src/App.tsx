@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { tasks as dataTask } from './mocks/tasks.json';
 import Header from './Header/Header';
 import MainContent from './MainContent/MainContent';
 import styled from 'styled-components';
 import * as actions from './redux/actions';
-import { Item } from './types';
 import { connect } from 'react-redux';
 
 const AppContainer = styled.div`
@@ -14,11 +13,7 @@ const AppContainer = styled.div`
 
 function App(props: any) {
   useEffect(() => {
-    const promise = new Promise(function (resolve, reject) {
-      setTimeout(resolve, 700);
-    });
-
-    promise.then(() => props.loadTasks(dataTask)); 
+    props.loadTasksAsync(dataTask);
   }, []);
 
   const addNewTask = (title: string) => props.addTask(title);
@@ -47,6 +42,7 @@ const mapDispatchToProps = {
   addTask: actions.AddTask,
   changeStatus: actions.ChangeStatus,
   loadTasks: actions.LoadTasks,
+  loadTasksAsync: actions.LoadTasksAsync,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

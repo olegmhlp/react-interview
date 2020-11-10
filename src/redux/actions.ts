@@ -1,3 +1,5 @@
+import { Action } from 'redux'
+import { ThunkAction } from 'redux-thunk'
 export const ADD_TASK = 'ADD_TASK'
 export const LOAD_TASKS = 'LOAD_TASKS'
 export const CHANGE_STATUS = 'CHANGE_STATUS'
@@ -65,6 +67,13 @@ export function LoadTasks(list: Tasks[]): Load {
 const initialState: TasksList = {
     tasksList: []
 }
+
+export const LoadTasksAsync = (list: Tasks[]): ThunkAction<void, TasksList, unknown, Action<string>> => async dispatch => {
+    setTimeout(() => { dispatch(LoadTasks(list)) }, 800)
+
+}
+
+
 
 
 export const tasksReducer = (
