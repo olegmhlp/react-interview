@@ -12,7 +12,7 @@ const TasksContainer: React.FC<Tasks> = ({ taskList, changeStatus }) => {
     <Container>
       <Header>Active tasks</Header>
       <Container>
-        {taskList.length !== 0 &&
+        {taskList && taskList.length !== 0 &&
           taskList.map((task) => {
             if (task.status)
               return (
@@ -28,7 +28,7 @@ const TasksContainer: React.FC<Tasks> = ({ taskList, changeStatus }) => {
       </Container>
       <Header>Completed tasks</Header>
       <Container>
-        {taskList.length !== 0 &&
+        {taskList && taskList.length !== 0 &&
           taskList.map((task) => {
             if (!task.status)
               return (

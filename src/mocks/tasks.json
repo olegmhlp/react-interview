@@ -1,0 +1,8 @@
+{
+  "tasks": [
+    { "id": 1, "title": "One", "status": true },
+    { "id": 2, "title": "Two", "status": true },
+    { "id": 3, "title": "Three", "status": false },
+    { "id": 4, "title": "Four", "status": true }
+  ]
+}

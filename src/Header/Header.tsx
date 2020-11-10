@@ -4,7 +4,7 @@ import { TaskList, Item } from '../types';
 
 const Header: React.FC<TaskList> = ({ taskList }) => {
   let completed = 0;
-  taskList.length !== 0 &&
+  taskList && taskList.length !== 0 &&
     taskList.forEach((item: Item) => {
       !item.status && completed++;
     });
@@ -15,7 +15,7 @@ const Header: React.FC<TaskList> = ({ taskList }) => {
       <TasksStat>
         <HeaderText>Completed/All</HeaderText>
         <HeaderText>
-          {completed}/{taskList.length}
+          {completed}/{taskList?.length || 0}
         </HeaderText>
       </TasksStat>
     </NavBar>

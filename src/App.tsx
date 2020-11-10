@@ -1,39 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { tasks as dataTask } from './mocks/tasks.json';
 import Header from './Header/Header';
 import MainContent from './MainContent/MainContent';
 import styled from 'styled-components';
+import * as actions from './redux/actions';
+import { Item } from './types';
+import { connect } from 'react-redux';
 
 const AppContainer = styled.div`
   max-width: 1000px;
   margin: 0 auto;
 `;
 
-function App() {
-  const [taskList, setTaskList] = useState([
-    { id: 1, title: 'One', status: true },
-    { id: 2, title: 'Two', status: true },
-    { id: 3, title: 'Three', status: false },
-    { id: 4, title: 'Four', status: true },
-  ]);
+function App(props: any) {
+  useEffect(() => {
+    const promise = new Promise(function (resolve, reject) {
+      setTimeout(resolve, 700);
+    });
 
-  const addNewTask = (title: string) => {
-    const newTask = { id: taskList.length + 1, title, status: true };
-    setTaskList([...taskList, newTask]);
-  };
+    promise.then(() => props.loadTasks(dataTask)); 
+  }, []);
 
-  const changeStatus = (id: number) => {
-    const newArr = [...taskList];
-    const findTask = newArr.find((task) => task.id === +id);
-    if (findTask) findTask.status = !findTask.status;
-    setTaskList(newArr);
-  };
+  const addNewTask = (title: string) => props.addTask(title);
+
+  const changeStatus = (id: number) => props.changeStatus(id);
 
   return (
     <div className="App">
       <AppContainer>
-        <Header taskList={taskList} />
+        <Header taskList={props.tasksList} />
         <MainContent
-          taskList={taskList}
+          taskList={props.tasksList}
           addNewTask={addNewTask}
           changeStatus={changeStatus}
         />
@@ -42,4 +39,14 @@ function App() {
   );
 }
 
-export default App;
+function mapStateToProps(state: any) {
+  return { tasksList: state.tasksList };
+}
+
+const mapDispatchToProps = {
+  addTask: actions.AddTask,
+  changeStatus: actions.ChangeStatus,
+  loadTasks: actions.LoadTasks,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
